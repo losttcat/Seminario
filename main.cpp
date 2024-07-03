@@ -1,6 +1,4 @@
 #include <Arduino.h>
-#include <Wire.h>
-#include <SparkFun_SHTC3.h>
 #include <StarterKitNB.h>
 
 //Definitions
@@ -11,7 +9,6 @@
 
 // Objects
 StarterKitNB sk;
-SHTC3 mySHTC3;
 
 // NB-IoT
 String apn = "m2m.entel.cl";
@@ -21,9 +18,9 @@ String band = "B28 LTE";
 String Network = "NB";
 
 // MQTT
-String clientID = "111";
-String userBroker = "martinmoreno";
-String passwordBroker = "aio_qvkN13d4cIfduB8dYO0LTqbmBKFR";
+String clientID = "cualquiera";
+String userBroker = "user adafruit";
+String passwordBroker = "Active key";
 String broker = "io.adafruit.com";
 int port = 1883;
 
@@ -31,31 +28,19 @@ int port = 1883;
 String topic1 = "martinmoreno/feeds/Temperatura";
 String topic2 = "martinmoreno/feeds/Humedad";
 String topic3 = "martinmoreno/feeds/battery";
-String topic4;
 float batery;             
 
 // temp&hum
 String hum = "";
 String temp = "";
-void errorDecoder(SHTC3_Status_TypeDef message)             
-{
-  switch(message)
-  {
-    case SHTC3_Status_Nominal : Serial.println("Nominal"); break;
-    case SHTC3_Status_Error : Serial.println("Error"); break;
-    case SHTC3_Status_CRC_Fail : Serial.println("CRC Fail"); break;
-    default : Serial.println("Unknown return code"); break;
-  }
-}
+// funciones para el sensor
 
 void setup() {
 
   sk.Setup();
   delay(500);
 
-  Wire.begin();
-  errorDecoder(mySHTC3.begin()); 
-  delay(500);
+  // código para el sensor
 
   sk.UserAPN(apn, user, password);
 	sk.Connect(apn, band, Network);
@@ -71,9 +56,9 @@ void loop() {
 		delay(2000);
   }
 
-  SHTC3_Status_TypeDef result = mySHTC3.update();
-  hum = String(mySHTC3.toPercent());
-  temp = String(mySHTC3.toDegC());
+  // código para e sensor
+  hum = 40;
+  temp = 40;
   batery = (analogRead(PIN_VBAT) * REAL_VBAT_MV_PER_LSB /1000);
 
   Serial.println(hum);
