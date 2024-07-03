@@ -1,6 +1,6 @@
 # Seminario
 ## Código para platformio.ini
-
+```
 [env:wiscore_rak11200]
 platform = espressif32
 board = wiscore_rak11200
@@ -11,3 +11,4 @@ lib_deps =
     sparkfun/SparkFun SHTC3 Humidity and Temperature Sensor Library@^1.1.4
     C:\yourdirectory\StarterKitLibrary
     otras librerias
+```
